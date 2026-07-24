@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+    <!-- Dark background -->
+    <rect width="64" height="64" rx="14" fill="#111111"></rect>
+
+    <!-- Red UNO oval -->
+    <ellipse cx="32" cy="32" rx="25" ry="18" fill="#e32636" transform="rotate(-12 32 32)"></ellipse>
+
+    <!-- White border -->
+    <ellipse cx="32" cy="32" rx="25" ry="18" fill="none" stroke="#ffffff" stroke-width="3" transform="rotate(-12 32 32)"></ellipse>
+
+    <!-- UNO text -->
+    <text x="32" y="39" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="900" font-style="italic" fill="#ffd500" stroke="#111111" stroke-width="1" transform="rotate(-12 32 32)">
+        UNO
+    </text>
+</svg>

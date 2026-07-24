@@ -1,0 +1,1405 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #071f16;
+    color: white;
+    min-width: 320px;
+}
+
+button {
+    font-family: inherit;
+}
+
+.game-page {
+    min-height: 100vh;
+    background:
+        radial-gradient(
+            circle at center,
+            #17643d 0%,
+            #0d442c 50%,
+            #062719 100%
+        );
+}
+
+.game-header {
+    min-height: 70px;
+    background: rgba(0, 0, 0, 0.35);
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 10px 30px;
+}
+
+.header-logo {
+    background: #e32636;
+    color: #ffd600;
+
+    border: 3px solid white;
+    border-radius: 50%;
+
+    font-size: 24px;
+    font-weight: 900;
+    font-style: italic;
+
+    padding: 10px 13px;
+
+    transform: rotate(-10deg);
+}
+
+.game-status {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+
+.game-status span {
+    font-size: 12px;
+    color: #cbd5d1;
+}
+
+.game-status strong {
+    font-size: 18px;
+}
+
+.new-game-button,
+.primary-button {
+    border: none;
+    border-radius: 10px;
+
+    background: #f1c40f;
+    color: #111;
+
+    font-weight: bold;
+    font-size: 15px;
+
+    padding: 12px 20px;
+
+    cursor: pointer;
+}
+
+.new-game-button:hover,
+.primary-button:hover {
+    transform: translateY(-1px);
+}
+
+.new-game-button:disabled,
+.primary-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.game-table {
+    min-height: calc(100vh - 120px);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 25px;
+}
+
+.computer-area,
+.player-area {
+    text-align: center;
+}
+
+.player-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    margin-bottom: 15px;
+}
+
+.player-info h2 {
+    font-size: 18px;
+}
+
+.card-count {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.computer-hand,
+.player-hand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 6px;
+}
+
+.uno-card {
+    width: 82px;
+    height: 120px;
+
+    border-radius: 10px;
+    border: 4px solid white;
+
+    position: relative;
+
+    color: white;
+
+    font-weight: 900;
+
+    box-shadow:
+        0 4px 8px rgba(0, 0, 0, 0.35);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.player-hand .uno-card:hover:not(:disabled) {
+    transform: translateY(-12px);
+
+    box-shadow:
+        0 12px 18px rgba(0, 0, 0, 0.35);
+}
+
+.uno-card:disabled {
+    cursor: default;
+}
+
+.red {
+    background: #df2027;
+}
+
+.blue {
+    background: #1261aa;
+}
+
+.green {
+    background: #169b45;
+}
+
+.yellow {
+    background: #f5c518;
+    color: #111;
+}
+
+.wild-card {
+    background:
+        linear-gradient(
+            135deg,
+            #e5232d 0%,
+            #e5232d 25%,
+            #1559a6 25%,
+            #1559a6 50%,
+            #f3c515 50%,
+            #f3c515 75%,
+            #169b45 75%
+        );
+}
+
+.card-center {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(-12deg);
+
+    width: 55px;
+    height: 85px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.9);
+
+    color: #111;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 32px;
+}
+
+.card-corner {
+    position: absolute;
+
+    font-size: 17px;
+
+    z-index: 2;
+}
+
+.top-left {
+    top: 5px;
+    left: 7px;
+}
+
+.bottom-right {
+    right: 7px;
+    bottom: 5px;
+
+    transform: rotate(180deg);
+}
+
+.card-back {
+    background: #111;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.back-logo {
+    background: #e5232d;
+    color: #f5d313;
+
+    width: 60px;
+    height: 82px;
+
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-style: italic;
+    font-size: 19px;
+
+    transform: rotate(-15deg);
+}
+
+.computer-hand .uno-card {
+    width: 58px;
+    height: 86px;
+}
+
+.computer-hand .back-logo {
+    width: 42px;
+    height: 60px;
+    font-size: 13px;
+}
+
+.table-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 35px;
+
+    margin: 30px 0;
+}
+
+.pile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 8px;
+}
+
+.pile-label,
+.pile-count {
+    font-size: 12px;
+    color: #d5e4dc;
+}
+
+.direction {
+    font-size: 32px;
+    opacity: 0.7;
+}
+
+.draw-pile {
+    width: 82px;
+    height: 120px;
+
+    background: #111;
+
+    border: 4px solid white;
+    border-radius: 10px;
+
+    padding: 6px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 8px rgba(0, 0, 0, 0.35);
+}
+
+.draw-pile:hover:not(:disabled) {
+    transform: translateY(-5px);
+}
+
+.draw-pile:disabled {
+    opacity: 0.7;
+    cursor: default;
+}
+
+.draw-pile-inner {
+    width: 100%;
+    height: 100%;
+
+    border-radius: 50%;
+
+    background: #df2027;
+    color: #f4d313;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 19px;
+    font-style: italic;
+    font-weight: 900;
+
+    transform: rotate(-12deg);
+}
+
+.message-bar {
+    text-align: center;
+
+    background: rgba(0, 0, 0, 0.25);
+
+    padding: 9px;
+
+    font-size: 14px;
+}
+
+.winner-banner {
+    position: fixed;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 20;
+
+    background: #111;
+
+    border: 2px solid white;
+    border-radius: 18px;
+
+    padding: 35px 50px;
+
+    text-align: center;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+.winner-banner h2 {
+    margin-bottom: 20px;
+}
+
+.start-screen {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle,
+            #17643d,
+            #062719
+        );
+}
+
+.start-content {
+    text-align: center;
+}
+
+.start-content h1 {
+    font-size: 50px;
+    margin-top: 25px;
+}
+
+.start-content p {
+    margin: 10px 0 25px;
+    color: #d2dfd8;
+}
+
+.uno-logo {
+    width: 150px;
+    height: 105px;
+
+    margin: auto;
+
+    border-radius: 50%;
+
+    border: 7px solid white;
+
+    background: #e32636;
+    color: #ffd500;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 45px;
+    font-weight: 900;
+    font-style: italic;
+
+    transform: rotate(-12deg);
+}
+
+.message {
+    margin-top: 15px;
+}
+
+@media (max-width: 600px) {
+
+    .game-header {
+        padding: 10px 15px;
+    }
+
+    .game-table {
+        padding: 15px 8px;
+    }
+
+    .table-center {
+        gap: 15px;
+    }
+
+    .uno-card {
+        width: 64px;
+        height: 95px;
+    }
+
+    .card-center {
+        width: 43px;
+        height: 65px;
+        font-size: 24px;
+    }
+
+    .draw-pile {
+        width: 64px;
+        height: 95px;
+    }
+
+    .computer-hand .uno-card {
+        width: 45px;
+        height: 68px;
+    }
+}
+
+/* ========================================
+   COLOR SELECTION MODAL
+======================================== */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    z-index: 1000;
+}
+
+.color-modal {
+    position: relative;
+
+    width: 100%;
+    max-width: 480px;
+
+    background: #ffffff;
+    color: #1f2937;
+
+    border-radius: 22px;
+
+    padding: 32px;
+
+    text-align: center;
+
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.45);
+
+    animation: modalOpen 0.2s ease;
+}
+
+@keyframes modalOpen {
+
+    from {
+        opacity: 0;
+        transform: translateY(15px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modal-close {
+    position: absolute;
+
+    top: 14px;
+    right: 17px;
+
+    width: 35px;
+    height: 35px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #f1f3f5;
+    color: #555;
+
+    font-size: 24px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+.modal-close:hover {
+    background: #e5e7eb;
+}
+
+.modal-icon {
+    width: 60px;
+    height: 60px;
+
+    margin: 0 auto 16px;
+
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e32636 0 25%,
+            #f2c500 25% 50%,
+            #179b45 50% 75%,
+            #1261aa 75%
+        );
+
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 27px;
+    font-weight: 900;
+
+    box-shadow:
+        0 7px 15px rgba(0, 0, 0, 0.18);
+}
+
+.color-modal h2 {
+    margin-bottom: 7px;
+
+    font-size: 25px;
+    color: #111827;
+}
+
+.color-modal > p {
+    margin-bottom: 25px;
+
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.color-options {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 12px;
+}
+
+.color-option {
+    border: 2px solid #e5e7eb;
+    border-radius: 14px;
+
+    background: #fff;
+
+    padding: 14px 6px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 9px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.color-option:hover {
+    transform: translateY(-4px);
+
+    border-color: #9ca3af;
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.color-circle {
+    width: 52px;
+    height: 52px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    border: 3px solid rgba(255,255,255,0.8);
+
+    box-shadow:
+        0 3px 8px rgba(0,0,0,0.2);
+}
+
+.red-option .color-circle {
+    background: #df2027;
+}
+
+.yellow-option .color-circle {
+    background: #f5c518;
+    color: #111;
+}
+
+.green-option .color-circle {
+    background: #169b45;
+}
+
+.blue-option .color-circle {
+    background: #1261aa;
+}
+
+.color-option strong {
+    color: #374151;
+    font-size: 13px;
+}
+
+.modal-cancel {
+    width: 100%;
+
+    margin-top: 22px;
+
+    padding: 11px;
+
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+
+    background: #f9fafb;
+    color: #374151;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.modal-cancel:hover {
+    background: #f1f3f5;
+}
+
+@media (max-width: 500px) {
+
+    .color-modal {
+        padding: 28px 18px 20px;
+    }
+
+    .color-options {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ========================================
+   UNO CALL BUTTON
+======================================== */
+
+.uno-call-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    margin: 10px auto 18px;
+
+    min-height: 100px;
+}
+
+.uno-warning {
+    margin-bottom: 10px;
+
+    font-size: 13px;
+    color: #f8f1c7;
+
+    text-align: center;
+}
+
+.uno-call-button {
+    width: 95px;
+    height: 95px;
+
+    border: 6px solid #ffffff;
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #ff5b5b,
+            #df2027 45%,
+            #9f1017 100%
+        );
+
+    color: #ffd500;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 0 #861017,
+        0 12px 25px rgba(0, 0, 0, 0.4);
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+
+    animation:
+        unoPulse 1.3s infinite;
+}
+
+.uno-call-button span {
+    display: block;
+
+    font-size: 25px;
+    font-weight: 900;
+    font-style: italic;
+
+    transform: rotate(-10deg);
+
+    text-shadow:
+        2px 2px 0 #111;
+}
+
+.uno-call-button:hover:not(:disabled) {
+    transform: translateY(-4px) scale(1.05);
+
+    box-shadow:
+        0 10px 0 #861017,
+        0 17px 30px rgba(0, 0, 0, 0.45);
+}
+
+.uno-call-button:active:not(:disabled) {
+    transform: translateY(4px);
+
+    box-shadow:
+        0 3px 0 #861017,
+        0 7px 12px rgba(0, 0, 0, 0.35);
+}
+
+.uno-call-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+@keyframes unoPulse {
+    0%,
+    100% {
+        box-shadow:
+            0 7px 0 #861017,
+            0 0 0 0 rgba(255, 213, 0, 0.45);
+    }
+
+    50% {
+        box-shadow:
+            0 7px 0 #861017,
+            0 0 0 14px rgba(255, 213, 0, 0);
+    }
+}
+
+
+/* ========================================
+   UNO CALLED SUCCESS
+======================================== */
+
+.uno-called-status {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    background: rgba(10, 90, 52, 0.9);
+
+    border: 1px solid rgba(
+        255,
+        255,
+        255,
+        0.25
+    );
+
+    border-radius: 14px;
+
+    padding: 11px 18px;
+
+    box-shadow:
+        0 6px 15px rgba(0, 0, 0, 0.25);
+}
+
+.uno-check {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+    color: #159447;
+
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.uno-called-status div {
+    display: flex;
+    flex-direction: column;
+
+    text-align: left;
+}
+
+.uno-called-status strong {
+    font-size: 14px;
+}
+
+.uno-called-status small {
+    margin-top: 2px;
+
+    color: #cce9d9;
+
+    font-size: 11px;
+}
+
+
+/* ========================================
+   UNO PENALTY NOTIFICATION
+======================================== */
+
+.penalty-notification {
+    position: fixed;
+
+    top: 90px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 900;
+
+    width: calc(100% - 40px);
+    max-width: 430px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    background: #ffffff;
+    color: #1f2937;
+
+    border-left: 6px solid #df2027;
+
+    border-radius: 14px;
+
+    padding: 15px 18px;
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.35);
+
+    animation:
+        penaltySlide 0.3s ease;
+}
+
+.penalty-icon {
+    min-width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #df2027;
+    color: #ffffff;
+
+    font-size: 21px;
+    font-weight: 900;
+}
+
+.penalty-notification > div:last-child {
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+.penalty-notification strong {
+    color: #c71920;
+
+    font-size: 15px;
+}
+
+.penalty-notification span {
+    color: #6b7280;
+
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+@keyframes penaltySlide {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translate(-50%, -20px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translate(-50%, 0);
+    }
+}
+
+
+/* ========================================
+   MOBILE UNO BUTTON
+======================================== */
+
+@media (max-width: 600px) {
+
+    .uno-call-button {
+        width: 78px;
+        height: 78px;
+    }
+
+    .uno-call-button span {
+        font-size: 21px;
+    }
+
+    .penalty-notification {
+        top: 75px;
+    }
+}
+
+/* ========================================
+   PERMANENT UNO PLAYER ZONES
+======================================== */
+
+.uno-player-zone {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+}
+
+
+/* ========================================
+   PERMANENT UNO CONTROL
+======================================== */
+
+.uno-side-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    margin: 8px 0 14px;
+}
+
+.uno-owner {
+    min-width: 65px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #d5e4dc;
+
+    text-align: right;
+}
+
+
+/* ========================================
+   PERMANENT UNO BUTTON
+======================================== */
+
+.uno-permanent-button {
+    width: 76px;
+    height: 54px;
+
+    border: 4px solid #ffffff;
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #ff5252,
+            #df2027 48%,
+            #971017 100%
+        );
+
+    color: #ffd500;
+
+    font-size: 19px;
+    font-weight: 900;
+    font-style: italic;
+
+    text-shadow:
+        2px 2px 0 #111;
+
+    transform: rotate(-8deg);
+
+    box-shadow:
+        0 5px 0 #731015,
+        0 8px 14px rgba(0, 0, 0, 0.35);
+
+    transition:
+        transform 0.15s ease,
+        opacity 0.15s ease,
+        filter 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+
+/* ========================================
+   UNO DISABLED
+======================================== */
+
+.uno-permanent-button.uno-disabled {
+    opacity: 0.38;
+
+    filter:
+        grayscale(0.8)
+        brightness(0.7);
+
+    cursor: not-allowed;
+
+    box-shadow:
+        0 3px 0 #551014,
+        0 5px 10px rgba(0, 0, 0, 0.25);
+}
+
+
+/* ========================================
+   PLAYER UNO ENABLED
+======================================== */
+
+.uno-permanent-button.uno-enabled {
+    opacity: 1;
+
+    cursor: pointer;
+
+    animation:
+        permanentUnoPulse
+        0.8s
+        infinite;
+}
+
+.uno-permanent-button.uno-enabled:hover {
+    transform:
+        rotate(-8deg)
+        translateY(-4px)
+        scale(1.08);
+
+    box-shadow:
+        0 8px 0 #731015,
+        0 14px 25px rgba(0, 0, 0, 0.45);
+}
+
+.uno-permanent-button.uno-enabled:active {
+    transform:
+        rotate(-8deg)
+        translateY(3px)
+        scale(0.98);
+}
+
+
+/* ========================================
+   PLAYER CALLED UNO
+======================================== */
+
+.uno-permanent-button.uno-called {
+    opacity: 1;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #2ecc71,
+            #169b45 50%,
+            #087232 100%
+        );
+
+    cursor: default;
+
+    animation: none;
+
+    box-shadow:
+        0 5px 0 #075c29,
+        0 8px 15px rgba(0, 0, 0, 0.35);
+}
+
+
+/* ========================================
+   COMPUTER CALLED UNO
+======================================== */
+
+.uno-permanent-button.uno-computer-called {
+    opacity: 1;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #ff5b5b,
+            #df2027 48%,
+            #971017 100%
+        );
+
+    animation:
+        computerUnoFlash
+        0.6s
+        ease
+        3;
+
+    box-shadow:
+        0 5px 0 #731015,
+        0 0 20px rgba(255, 213, 0, 0.7);
+}
+
+
+/* ========================================
+   UNO TEXT BELOW BUTTON
+======================================== */
+
+.uno-side-control small {
+    min-width: 70px;
+
+    color: #d5e4dc;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    text-align: left;
+}
+
+.player-zone
+.uno-side-control
+small {
+    color: #f7e9a5;
+}
+
+
+/* ========================================
+   UNO ENABLED ANIMATION
+======================================== */
+
+@keyframes permanentUnoPulse {
+
+    0%,
+    100% {
+        box-shadow:
+            0 5px 0 #731015,
+            0 0 0 0
+            rgba(255, 213, 0, 0.55);
+    }
+
+    50% {
+        box-shadow:
+            0 5px 0 #731015,
+            0 0 0 13px
+            rgba(255, 213, 0, 0);
+    }
+}
+
+
+/* ========================================
+   COMPUTER UNO ANIMATION
+======================================== */
+
+@keyframes computerUnoFlash {
+
+    0%,
+    100% {
+        transform:
+            rotate(-8deg)
+            scale(1);
+    }
+
+    50% {
+        transform:
+            rotate(-8deg)
+            scale(1.15);
+    }
+}
+
+
+/* ========================================
+   COMPUTER / PLAYER ZONE SPACING
+======================================== */
+
+.computer-zone {
+    margin-bottom: 5px;
+}
+
+.player-zone {
+    margin-top: 5px;
+}
+
+
+/* ========================================
+   MOBILE PERMANENT UNO
+======================================== */
+
+@media (max-width: 600px) {
+
+    .uno-side-control {
+        gap: 7px;
+
+        margin:
+            6px 0
+            10px;
+    }
+
+    .uno-permanent-button {
+        width: 65px;
+        height: 46px;
+
+        border-width: 3px;
+
+        font-size: 16px;
+    }
+
+    .uno-owner {
+        min-width: 55px;
+
+        font-size: 11px;
+    }
+
+    .uno-side-control small {
+        min-width: 58px;
+
+        font-size: 10px;
+    }
+}
+
+/* ========================================
+   30 SECOND TURN TIMER
+======================================== */
+
+.turn-timer {
+    margin-top: 6px;
+
+    min-width: 90px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 5px;
+
+    padding: 5px 12px;
+
+    background: rgba(0, 0, 0, 0.35);
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    border-radius: 20px;
+}
+
+.timer-icon {
+    font-size: 15px;
+}
+
+.timer-number {
+    font-size: 18px !important;
+    font-weight: 900;
+    color: white !important;
+}
+
+.turn-timer small {
+    font-size: 10px;
+    color: #cbd5d1;
+}
+
+
+/* LAST 10 SECONDS */
+
+.turn-timer.timer-warning {
+    background: rgba(190, 20, 30, 0.9);
+
+    border-color: rgba(255, 255, 255, 0.5);
+
+    animation: timerPulse 1s infinite;
+}
+
+.timer-warning .timer-number {
+    color: #ffd500 !important;
+}
+
+@keyframes timerPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.08);
+    }
+}
+
+
+/* ========================================
+   ALWAYS VISIBLE UNO BUTTON
+======================================== */
+
+.uno-call-button.uno-disabled {
+    opacity: 0.35;
+    filter: grayscale(0.7);
+    animation: none;
+    cursor: not-allowed;
+}
+
+.uno-call-button.uno-active {
+    opacity: 1;
+    filter: none;
+    cursor: pointer;
+    animation: unoPulse 1.3s infinite;
+}
