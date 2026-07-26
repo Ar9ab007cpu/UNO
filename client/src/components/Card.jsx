@@ -45,23 +45,31 @@ const Card = ({
             ? "wild-card"
             : card.color;
 
+    const displayValue =
+        getDisplayValue();
+
+    const compactClass =
+        String(displayValue).length > 1
+            ? "compact-value"
+            : "";
+
     return (
         <button
-            className={`uno-card ${cardClass}`}
+            className={`uno-card ${cardClass} ${compactClass}`}
             onClick={onClick}
             disabled={disabled}
             type="button"
         >
             <span className="card-corner top-left">
-                {getDisplayValue()}
+                {displayValue}
             </span>
 
             <div className="card-center">
-                {getDisplayValue()}
+                {displayValue}
             </div>
 
             <span className="card-corner bottom-right">
-                {getDisplayValue()}
+                {displayValue}
             </span>
         </button>
     );

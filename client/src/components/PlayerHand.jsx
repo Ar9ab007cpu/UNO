@@ -5,14 +5,24 @@ const PlayerHand = ({
     onPlayCard,
     disabled = false,
     canPlayCard = null,
+    name = "You",
+    avatar = "",
 }) => {
     return (
         <section className="player-area">
 
             <div className="player-info">
 
+                {avatar && (
+                    <img
+                        className="player-avatar"
+                        src={avatar}
+                        alt=""
+                    />
+                )}
+
                 <h2>
-                    You
+                    {name}
                 </h2>
 
                 <span className="card-count">
@@ -21,7 +31,19 @@ const PlayerHand = ({
 
             </div>
 
-            <div className="player-hand">
+            <div
+                className={
+                    `player-hand ${
+                        cards.length > 10
+                            ? "many-cards"
+                            : ""
+                    } ${
+                        cards.length > 14
+                            ? "packed-cards"
+                            : ""
+                    }`
+                }
+            >
 
                 {cards.map(
                     (card, index) => {

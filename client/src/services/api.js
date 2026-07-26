@@ -6,10 +6,11 @@ const API = axios.create({
 });
 
 export const startGame =
-    async () => {
+    async (player = {}) => {
         const response =
             await API.post(
-                "/game/start"
+                "/game/start",
+                player
             );
 
         return response.data;

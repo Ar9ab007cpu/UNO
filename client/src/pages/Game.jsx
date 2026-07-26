@@ -21,6 +21,36 @@ import {
 
 const TURN_TIME = 30;
 
+const COMPUTER_NAME = "Nattu Kaka";
+
+const AVATAR_OPTIONS = [
+    {
+        id: "player-1",
+        label: "Red",
+        src: "/avatars/player-1.svg",
+    },
+    {
+        id: "player-2",
+        label: "Blue",
+        src: "/avatars/player-2.svg",
+    },
+    {
+        id: "player-3",
+        label: "Green",
+        src: "/avatars/player-3.svg",
+    },
+    {
+        id: "player-4",
+        label: "Headband",
+        src: "/avatars/player-4.svg",
+    },
+    {
+        id: "player-5",
+        label: "Pigtails",
+        src: "/avatars/player-5.svg",
+    },
+];
+
 
 const Game = () => {
 
@@ -32,6 +62,24 @@ const Game = () => {
         message,
         setMessage,
     } = useGame();
+
+    const computerName =
+        game?.computerName ||
+        COMPUTER_NAME;
+
+    const playerDisplayName =
+        game?.playerName ||
+        "You";
+
+    const [playerName, setPlayerName] =
+        useState("");
+
+    const [
+        selectedAvatar,
+        setSelectedAvatar,
+    ] = useState(
+        AVATAR_OPTIONS[0].src
+    );
 
 
     // ==========================================
@@ -72,6 +120,18 @@ const Game = () => {
 
     const handleStartGame = async () => {
 
+        const trimmedName =
+            playerName.trim();
+
+        if (!trimmedName) {
+
+            setMessage(
+                "Enter your name before starting."
+            );
+
+            return;
+        }
+
         try {
 
             setLoading(true);
@@ -90,7 +150,12 @@ const Game = () => {
 
 
             const data =
-                await startGame();
+                await startGame({
+                    playerName:
+                        trimmedName,
+                    playerAvatar:
+                        selectedAvatar,
+                });
 
 
             setGame(data);
@@ -319,7 +384,7 @@ const Game = () => {
         ) {
 
             setMessage(
-                "Please wait for the computer."
+                `Please wait for ${computerName}.`
             );
 
             return;
@@ -445,7 +510,7 @@ const Game = () => {
         ) {
 
             setMessage(
-                "Please wait for the computer."
+                `Please wait for ${computerName}.`
             );
 
             return;
@@ -759,7 +824,7 @@ const Game = () => {
 
 
                         setMessage(
-                            "Computer is thinking..."
+                            `${computerName} is thinking...`
                         );
 
 
@@ -784,7 +849,7 @@ const Game = () => {
                         ) {
 
                             setMessage(
-                                "Computer won the game!"
+                                `${computerName} won the game!`
                             );
 
                         } else {
@@ -795,7 +860,7 @@ const Game = () => {
                                     data.currentTurn ===
                                     "player"
                                         ? "Your turn."
-                                        : "Computer plays again."
+                                        : `${computerName} plays again.`
                                 )
                             );
                         }
@@ -812,7 +877,7 @@ const Game = () => {
                             error.response
                                 ?.data
                                 ?.message ||
-                            "Computer move failed."
+                            `${computerName} move failed.`
                         );
 
 
@@ -853,34 +918,123 @@ const Game = () => {
                 <div className="start-content">
 
                     <div className="uno-logo">
-                        UNO
+                        Jazzyyy UNO
                     </div>
 
 
                     <h1>
-                        UNO
+                        Jazzyyy UNO
                     </h1>
 
 
                     <p>
-                        Player vs Computer
+                        Choose your player for a match
+                        against {COMPUTER_NAME}.
                     </p>
 
 
-                    <button
-                        className="primary-button"
-                        onClick={
-                            handleStartGame
-                        }
-                        disabled={loading}
-                        type="button"
+                    <form
+                        className="start-form"
+                        onSubmit={(event) => {
+                            event.preventDefault();
+                            handleStartGame();
+                        }}
                     >
+                        <label
+                            className="name-field"
+                            htmlFor="player-name"
+                        >
+                            <span>
+                                Player Name
+                            </span>
 
-                        {loading
-                            ? "Starting..."
-                            : "Start New Game"}
+                            <input
+                                id="player-name"
+                                value={playerName}
+                                onChange={(event) =>
+                                    setPlayerName(
+                                        event.target.value
+                                    )
+                                }
+                                maxLength={24}
+                                placeholder="Enter your name"
+                                disabled={loading}
+                            />
+                        </label>
 
-                    </button>
+
+                        <div className="avatar-picker">
+                            {AVATAR_OPTIONS.map(
+                                (avatar) => (
+                                    <button
+                                        key={avatar.id}
+                                        className={
+                                            `avatar-option ${
+                                                selectedAvatar ===
+                                                avatar.src
+                                                    ? "selected"
+                                                    : ""
+                                            }`
+                                        }
+                                        onClick={() =>
+                                            setSelectedAvatar(
+                                                avatar.src
+                                            )
+                                        }
+                                        disabled={loading}
+                                        type="button"
+                                        aria-label={
+                                            `Choose ${avatar.label} avatar`
+                                        }
+                                    >
+                                        <img
+                                            src={avatar.src}
+                                            alt=""
+                                        />
+                                    </button>
+                                )
+                            )}
+                        </div>
+
+
+                        <div className="versus-preview">
+                            <div>
+                                <img
+                                    src={selectedAvatar}
+                                    alt=""
+                                />
+                                <strong>
+                                    {playerName.trim() ||
+                                        "You"}
+                                </strong>
+                            </div>
+
+                            <span>vs</span>
+
+                            <div>
+                                <img
+                                    src="/avatars/nattu-kaka.svg"
+                                    alt=""
+                                />
+                                <strong>
+                                    {COMPUTER_NAME}
+                                </strong>
+                            </div>
+                        </div>
+
+
+                        <button
+                            className="primary-button"
+                            disabled={loading}
+                            type="submit"
+                        >
+
+                            {loading
+                                ? "Starting..."
+                                : "Start New Game"}
+
+                        </button>
+                    </form>
 
 
                     {message && (
@@ -1165,7 +1319,7 @@ const Game = () => {
 
 
                 <div className="header-logo">
-                    UNO
+                    Jazzyyy UNO
                 </div>
 
 
@@ -1181,8 +1335,8 @@ const Game = () => {
 
                         {game.currentTurn ===
                         "player"
-                            ? "Your Turn"
-                            : "Computer"}
+                            ? `${playerDisplayName}'s Turn`
+                            : computerName}
 
                     </strong>
 
@@ -1310,8 +1464,8 @@ const Game = () => {
 
                         {game.winner ===
                         "player"
-                            ? "🎉 You Won!"
-                            : "🤖 Computer Won"}
+                            ? `${playerDisplayName} Won!`
+                            : `${computerName} Won`}
 
                     </h2>
 
@@ -1344,6 +1498,10 @@ const Game = () => {
                 <ComputerHand
                     cards={
                         game.computerHand
+                    }
+                    name={computerName}
+                    avatar={
+                        game.computerAvatar
                     }
                 />
 
@@ -1457,6 +1615,10 @@ const Game = () => {
                 <PlayerHand
                     cards={
                         game.playerHand
+                    }
+                    name={playerDisplayName}
+                    avatar={
+                        game.playerAvatar
                     }
 
                     onPlayCard={

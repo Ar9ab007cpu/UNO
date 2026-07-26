@@ -1,21 +1,34 @@
 import mongoose from "mongoose";
 
 const connectDB = async () => {
+    if (!process.env.MONGO_URI) {
+        console.warn(
+            "MONGO_URI not set. Using in-memory game storage."
+        );
+
+        return false;
+    }
+
     try {
         const connection = await mongoose.connect(
-            process.env.MONGO_URI
+            process.env.MONGO_URI,
+            {
+                serverSelectionTimeoutMS: 3000,
+            }
         );
 
         console.log(
             `MongoDB Connected: ${connection.connection.host}`
         );
+
+        return true;
     } catch (error) {
-        console.error(
-            "MongoDB Connection Error:",
+        console.warn(
+            "MongoDB unavailable. Using in-memory game storage:",
             error.message
         );
 
-        process.exit(1);
+        return false;
     }
 };
 

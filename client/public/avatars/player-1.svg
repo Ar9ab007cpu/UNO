@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Female avatar with curly hair">
+  <rect width="120" height="120" rx="24" fill="#f0ded6"/>
+  <circle cx="60" cy="54" r="43" fill="#ffffff"/>
+  <path d="M27 112c5-25 18-39 33-39s28 14 33 39z" fill="#d81b60"/>
+  <path d="M42 75h36v19H42z" fill="#f2b08d"/>
+  <circle cx="60" cy="55" r="26" fill="#f7b28e"/>
+  <path d="M35 57c-5-22 8-39 25-39s31 15 28 38c-9-13-26-14-35-8-5 3-10 6-18 9z" fill="#5b1b2b"/>
+  <circle cx="40" cy="30" r="9" fill="#5b1b2b"/>
+  <circle cx="51" cy="23" r="10" fill="#5b1b2b"/>
+  <circle cx="64" cy="23" r="9" fill="#5b1b2b"/>
+  <circle cx="77" cy="30" r="9" fill="#5b1b2b"/>
+  <circle cx="35" cy="43" r="9" fill="#5b1b2b"/>
+  <circle cx="84" cy="44" r="9" fill="#5b1b2b"/>
+  <circle cx="50" cy="56" r="5" fill="#2d1720"/>
+  <circle cx="70" cy="56" r="5" fill="#2d1720"/>
+  <circle cx="48" cy="54" r="2" fill="#ffffff"/>
+  <circle cx="68" cy="54" r="2" fill="#ffffff"/>
+  <path d="M51 72c6 6 13 6 19 0" fill="none" stroke="#b60f43" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="43" cy="66" r="4" fill="#ef6f91" opacity=".65"/>
+  <circle cx="77" cy="66" r="4" fill="#ef6f91" opacity=".65"/>
+  <path d="M34 58c-11 13-16 29-13 45" fill="none" stroke="#4dc7d9" stroke-width="3" stroke-linecap="round"/>
+  <path d="M86 58c11 13 16 29 13 45" fill="none" stroke="#4dc7d9" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="22" cy="102" r="3" fill="#4dc7d9"/>
+  <circle cx="98" cy="102" r="3" fill="#4dc7d9"/>
+</svg>

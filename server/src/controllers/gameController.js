@@ -22,6 +22,10 @@ const COLORS = [
     "blue",
 ];
 
+const COMPUTER_NAME = "Nattu Kaka";
+const COMPUTER_AVATAR = "/avatars/nattu-kaka.svg";
+const DEFAULT_PLAYER_AVATAR = "/avatars/player-1.svg";
+
 
 // ==========================================
 // DRAW CARDS HELPER
@@ -93,6 +97,18 @@ export const startGame = async (
 
     try {
 
+        const playerName =
+            typeof req.body?.playerName === "string" &&
+            req.body.playerName.trim()
+                ? req.body.playerName.trim().slice(0, 24)
+                : "Player";
+
+        const playerAvatar =
+            typeof req.body?.playerAvatar === "string" &&
+            req.body.playerAvatar.trim()
+                ? req.body.playerAvatar.trim()
+                : DEFAULT_PLAYER_AVATAR;
+
         let deck = shuffleDeck(
             createDeck()
         );
@@ -124,7 +140,17 @@ export const startGame = async (
 
                 playerHand,
 
+                playerName,
+
+                playerAvatar,
+
                 computerHand,
+
+                computerName:
+                    COMPUTER_NAME,
+
+                computerAvatar:
+                    COMPUTER_AVATAR,
 
                 drawPile: deck,
 
@@ -150,7 +176,7 @@ export const startGame = async (
                 pendingDrawType: "",
 
                 lastAction:
-                    "Game started. Your turn.",
+                    `${playerName} vs ${COMPUTER_NAME}. Your turn.`,
             });
 
 
@@ -526,7 +552,7 @@ export const playCard = async (
                 "computer";
 
             game.lastAction =
-                `You played Draw Two. Computer must stack +2 or draw ${game.pendingDraw} cards.`;
+                `You played Draw Two. ${COMPUTER_NAME} must stack +2 or draw ${game.pendingDraw} cards.`;
         }
 
 
@@ -548,7 +574,7 @@ export const playCard = async (
                 "computer";
 
             game.lastAction =
-                `You played Wild Draw Four. Computer must stack +4 or draw ${game.pendingDraw} cards.`;
+                `You played Wild Draw Four. ${COMPUTER_NAME} must stack +4 or draw ${game.pendingDraw} cards.`;
         }
 
 
@@ -566,7 +592,7 @@ export const playCard = async (
                 "player";
 
             game.lastAction =
-                "You played Skip. Computer was skipped. Play again.";
+                `You played Skip. ${COMPUTER_NAME} was skipped. Play again.`;
         }
 
 
@@ -583,7 +609,7 @@ export const playCard = async (
                 "player";
 
             game.lastAction =
-                "You played Reverse. Computer was skipped. Play again.";
+                `You played Reverse. ${COMPUTER_NAME} was skipped. Play again.`;
         }
 
 
@@ -799,7 +825,7 @@ export const drawCard = async (
             "computer";
 
         game.lastAction =
-            "You drew one card. Computer's turn.";
+            `You drew one card. ${COMPUTER_NAME}'s turn.`;
 
 
         await game.save();
@@ -966,7 +992,7 @@ export const computerTurn = async (
 
 
                     game.lastAction =
-                        `Computer stacked +2. You must stack +2 or draw ${game.pendingDraw} cards.`;
+                        `${COMPUTER_NAME} stacked +2. You must stack +2 or draw ${game.pendingDraw} cards.`;
                 }
 
 
@@ -982,7 +1008,7 @@ export const computerTurn = async (
 
 
                     game.lastAction =
-                        `Computer stacked +4. You must stack +4 or draw ${game.pendingDraw} cards.`;
+                        `${COMPUTER_NAME} stacked +4. You must stack +4 or draw ${game.pendingDraw} cards.`;
                 }
 
 
@@ -1003,7 +1029,7 @@ export const computerTurn = async (
                         "finished";
 
                     game.lastAction =
-                        "Computer won the game!";
+                        `${COMPUTER_NAME} won the game!`;
                 }
 
 
@@ -1044,7 +1070,7 @@ export const computerTurn = async (
 
 
             game.lastAction =
-                `Computer could not stack and drew ${cardsDrawn} penalty cards. Your turn.`;
+                `${COMPUTER_NAME} could not stack and drew ${cardsDrawn} penalty cards. Your turn.`;
 
 
             await game.save();
@@ -1094,12 +1120,12 @@ export const computerTurn = async (
 
 
                 game.lastAction =
-                    "Computer drew a card. Your turn.";
+                    `${COMPUTER_NAME} drew a card. Your turn.`;
 
             } else {
 
                 game.lastAction =
-                    "Computer could not play. Your turn.";
+                    `${COMPUTER_NAME} could not play. Your turn.`;
             }
 
 
@@ -1176,7 +1202,7 @@ export const computerTurn = async (
 
 
             game.lastAction =
-                "Computer played Draw Two. Stack +2 or draw 2 cards.";
+                `${COMPUTER_NAME} played Draw Two. Stack +2 or draw 2 cards.`;
         }
 
 
@@ -1200,7 +1226,7 @@ export const computerTurn = async (
 
 
             game.lastAction =
-                "Computer played Wild Draw Four. Stack +4 or draw 4 cards.";
+                `${COMPUTER_NAME} played Wild Draw Four. Stack +4 or draw 4 cards.`;
         }
 
 
@@ -1220,7 +1246,7 @@ export const computerTurn = async (
 
 
             game.lastAction =
-                "Computer played Skip. Your turn was skipped.";
+                `${COMPUTER_NAME} played Skip. Your turn was skipped.`;
         }
 
 
@@ -1239,7 +1265,7 @@ export const computerTurn = async (
 
 
             game.lastAction =
-                "Computer played Reverse. Your turn was skipped.";
+                `${COMPUTER_NAME} played Reverse. Your turn was skipped.`;
         }
 
 
@@ -1254,7 +1280,7 @@ export const computerTurn = async (
 
 
             game.lastAction =
-                "Computer played a card.";
+                `${COMPUTER_NAME} played a card.`;
         }
 
 
@@ -1275,7 +1301,7 @@ export const computerTurn = async (
                 "finished";
 
             game.lastAction =
-                "Computer won the game!";
+                `${COMPUTER_NAME} won the game!`;
         }
 
 
@@ -1291,7 +1317,7 @@ export const computerTurn = async (
 
         res.status(500).json({
             message:
-                "Computer move failed",
+                `${COMPUTER_NAME} move failed`,
         });
     }
 };

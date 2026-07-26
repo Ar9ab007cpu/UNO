@@ -1,10 +1,22 @@
 import Card from "./Card";
 
-const ComputerHand = ({ cards = [] }) => {
+const ComputerHand = ({
+    cards = [],
+    name = "Nattu Kaka",
+    avatar = "/avatars/nattu-kaka.svg",
+}) => {
     return (
         <section className="computer-area">
             <div className="player-info">
-                <h2>Computer</h2>
+                {avatar && (
+                    <img
+                        className="player-avatar"
+                        src={avatar}
+                        alt=""
+                    />
+                )}
+
+                <h2>{name}</h2>
 
                 <span className="card-count">
                     {cards.length} cards

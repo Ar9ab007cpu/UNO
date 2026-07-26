@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Nattu Kaka avatar">
+  <rect width="120" height="120" rx="24" fill="#f0ded6"/>
+  <circle cx="60" cy="54" r="43" fill="#ffffff"/>
+  <path d="M25 112c6-24 19-37 35-37s29 13 35 37z" fill="#047d91"/>
+  <path d="M43 74h34v19H43z" fill="#ef9d73"/>
+  <circle cx="60" cy="54" r="26" fill="#ef9d73"/>
+  <path d="M34 48c3-19 18-30 35-27 14 3 22 15 20 33-12-13-25-19-39-17-5 5-10 8-16 11z" fill="#c56c18"/>
+  <path d="M39 42c10-13 27-17 42-5-10 0-21 1-32 5-3 2-6 2-10 0z" fill="#e08a2f"/>
+  <circle cx="50" cy="56" r="5" fill="#1c2f5a"/>
+  <circle cx="70" cy="56" r="5" fill="#1c2f5a"/>
+  <circle cx="48" cy="54" r="2" fill="#ffffff"/>
+  <circle cx="68" cy="54" r="2" fill="#ffffff"/>
+  <path d="M48 46c5-4 10-4 15 0" fill="none" stroke="#6c3517" stroke-width="3" stroke-linecap="round"/>
+  <path d="M66 46c5-4 10-4 15 0" fill="none" stroke="#6c3517" stroke-width="3" stroke-linecap="round"/>
+  <path d="M53 70c5 4 10 4 15 0" fill="none" stroke="#b85b41" stroke-width="4" stroke-linecap="round"/>
+  <path d="M60 56v9" fill="none" stroke="#d38360" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="37" cy="58" r="5" fill="#ef9d73"/>
+  <circle cx="83" cy="58" r="5" fill="#ef9d73"/>
+</svg>
